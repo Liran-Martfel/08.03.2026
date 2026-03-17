@@ -1,16 +1,16 @@
 import random
 
-def get_lucky_numbers() -> tuple:
-    amount = []
-    for i in range (3):
+def get_lucky_numbers(amount: int) -> tuple:
+    lucky = []
+    for i in range (amount):
         luck_number = random.randint(1,100)
-        amount.append(luck_number)
-    amount = tuple(amount)
-    return amount
-amount_ = get_lucky_numbers()
-print(amount_)
+        lucky.append(luck_number)
+    lucky = tuple(lucky)
+    return lucky
+lucky = get_lucky_numbers(3)
+print(lucky)
 
-def input_until_lucky(amount: tuple) -> int:
+def input_until_lucky(lucky: tuple) -> int | None:
     tries = 0
     while True:
         try:
@@ -19,11 +19,11 @@ def input_until_lucky(amount: tuple) -> int:
             if lucky_number < 1:
                 print('try positive numbers')
                 continue
-            if lucky_number in amount:
-                print(f'luckey_number! {lucky_number}, you tried {tries} times')
-                return lucky_number
+            if lucky_number in lucky:
+                print(f'lucky_number! {lucky_number}, you tried {tries} times')
+                return tries
 
         except ValueError:
             print('need positive integer, not str, try again')
 
-print(input_until_lucky(amount_))
+input_until_lucky(lucky)
